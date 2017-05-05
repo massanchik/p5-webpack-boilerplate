@@ -7,11 +7,8 @@ export default class Walker {
         this.y = this.p.height / 2;
     }
     update() {
-        let stepX = this.p.int(this.p.random(3)) -1;
-        let stepY = this.p.int(this.p.random(3)) -1;
-
-        this.x += stepX;
-        this.y += stepY;
+        this.x += this.chooseDir(this.x, this.p.mouseX);
+        this.y += this.chooseDir(this.y, this.p.mouseY);
 
         this.x = this.p.constrain(this.x, 0, this.p.width-1);
         this.y = this.p.constrain(this.y, 0, this.p.height-1);
@@ -19,5 +16,11 @@ export default class Walker {
     draw() {
         this.p.stroke(0);
         this.p.point(this.x, this.y);
+    }
+    chooseDir(source, target) {
+        if (source - target > 0) {
+            return this.p.random([-1, -1, 1]);
+        }
+        return this.p.random([-1, 1, 1]);
     }
 }
