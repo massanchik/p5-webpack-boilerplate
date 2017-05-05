@@ -5,8 +5,8 @@ import Walker from './walker';
 const sketch = function (p) {
     let walker = new Walker(p);
     p.setup = function () {
-        p.createCanvas(640, 480);
-        walker.init();
+        p.createCanvas(1280, 720);
+        walker.init(100);
     };
 
     p.draw = function () {
