@@ -1,19 +1,19 @@
 import P5 from 'p5';
-import Rain from './rain';
+import Mover from './mover';
 
 
 const sketch = function (p) {
-    let rain = new Rain(p);
+    let mover = new Mover(p);
     p.setup = function () {
         p.createCanvas(640, 480);
-        rain.init(500);
+        mover.init();
     };
 
     p.draw = function () {
         p.background(200);
 
-        rain.update();
-        rain.draw();
+        mover.update();
+        mover.draw();
     };
 };
 
