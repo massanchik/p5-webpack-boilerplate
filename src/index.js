@@ -14,6 +14,9 @@ const sketch = function (p) {
 
         mouse.sub(center);
         mouse.setMag(50);
+        // Or
+        // mouse.normalize();
+        // mouse.mult(50);
 
         p.translate(center.x, center.y);
 
