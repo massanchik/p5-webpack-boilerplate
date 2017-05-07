@@ -9,19 +9,10 @@ export default class Mover {
         this.size = 16;
     }
     update() {
+        this.bounds();
         this.velocity.add(this.acceleration);
         this.position.add(this.velocity);
         this.acceleration.mult(0);
-
-        if (this.position.y > this.p.height - this.size/2) {
-            this.acceleration.add(this.p.createVector(0, -5));
-        }
-        if (this.position.x > this.p.width - this.size/2) {
-            this.acceleration.add(this.p.createVector(-5, 0));
-        }
-        if (this.position.x < this.size/2) {
-            this.acceleration.add(this.p.createVector(5, 0));
-        }
     }
     draw() {
         this.p.stroke(50);
@@ -30,5 +21,16 @@ export default class Mover {
     }
     applyForce(force) {
         this.acceleration.add(force);
+    }
+    bounds() {
+        if (this.position.y > this.p.height - this.size / 2) {
+            this.applyForce(this.p.createVector(0, Math.min(-this.velocity.y * 2, -this.acceleration.y)));
+        }
+        if (this.position.x > this.p.width - this.size / 2) {
+            this.applyForce(this.p.createVector(-this.velocity.x * 2, 0));
+        }
+        if (this.position.x < this.size / 2) {
+            this.applyForce(this.p.createVector(-this.velocity.x * 2, 0));
+        }
     }
 }
