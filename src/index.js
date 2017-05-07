@@ -18,13 +18,20 @@ const sketch = function (p) {
 
 
         let wind = p.createVector(0.5, 0);
-        let c = -0.03;
+        let fc = -0.03;
+        let dc = -0.001;
 
         movers.map((mover) => {
             let friction = mover.velocity.copy();
             friction.normalize();
-            friction.mult(c);
+            friction.mult(fc);
             mover.applyForce(friction);
+
+            let drag = mover.velocity.copy();
+            drag.normalize();
+            let speed = mover.velocity.mag();
+            drag.mult(dc * speed * speed);
+            mover.applyForce(drag);
 
             let gravity = p.createVector(0, 0.3 * mover.mass);
             mover.applyForce(gravity);

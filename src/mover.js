@@ -8,7 +8,7 @@ export default class Mover {
         this.mass = this.p.random(.5, 4);
         this.size = 16 * this.mass;
 
-        this.position = this.p.createVector(this.p.random(this.size, this.p.width-this.size), this.p.height/2);
+        this.position = this.p.createVector(this.p.random(this.size, this.p.width-this.size), 0);
         this.velocity = this.p.createVector(0, 0);
         this.acceleration = this.p.createVector(0, 0);
     }
