@@ -12,6 +12,15 @@ const sketch = function (p) {
     p.draw = function () {
         p.background(200);
 
+        let gravity = p.createVector(0, 0.3);
+        let wind = p.createVector(0.2, 0);
+
+        mover.applyForce(gravity);
+
+        if (p.mouseIsPressed) {
+            mover.applyForce(wind);
+        }
+
         mover.update();
         mover.draw();
     };
