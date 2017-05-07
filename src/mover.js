@@ -28,14 +28,17 @@ export default class Mover {
         this.acceleration.add(f);
     }
     bounds() {
-        if (this.position.y > this.p.height - this.size) {
-            this.applyForce(this.p.createVector(0, -5));
+        if (this.position.y > this.p.height - this.size/2) {
+            this.velocity.y *= -1;
+            this.position.y = this.p.height - this.size / 2;
         }
-        if (this.position.x > this.p.width - this.size) {
-            this.applyForce(this.p.createVector(-5, 0));
+        if (this.position.x > this.p.width - this.size/2) {
+            this.velocity.x *= -1;
+            this.position.x = this.p.width - this.size / 2;
         }
-        if (this.position.x < this.size) {
-            this.applyForce(this.p.createVector(5, 0));
+        if (this.position.x < this.size/2) {
+            this.velocity.x *= -1;
+            this.position.x = this.size / 2;
         }
     }
 }
