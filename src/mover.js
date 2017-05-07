@@ -1,12 +1,16 @@
+import P5 from 'p5';
+
 export default class Mover {
     constructor(p) {
         this.p = p;
     }
     init() {
-        this.position = this.p.createVector(this.p.width/2, this.p.height/2);
+        this.mass = this.p.random(.5, 4);
+        this.size = 16 * this.mass;
+
+        this.position = this.p.createVector(this.p.random(this.size, this.p.width-this.size), this.p.height/2);
         this.velocity = this.p.createVector(0, 0);
         this.acceleration = this.p.createVector(0, 0);
-        this.size = 16;
     }
     update() {
         this.bounds();
@@ -20,17 +24,18 @@ export default class Mover {
         this.p.ellipse(this.position.x, this.position.y, this.size, this.size);
     }
     applyForce(force) {
-        this.acceleration.add(force);
+        let f = P5.Vector.div(force, this.mass);
+        this.acceleration.add(f);
     }
     bounds() {
-        if (this.position.y > this.p.height - this.size / 2) {
-            this.applyForce(this.p.createVector(0, Math.min(-this.velocity.y * 2, -this.acceleration.y)));
+        if (this.position.y > this.p.height - this.size) {
+            this.applyForce(this.p.createVector(0, -5));
         }
-        if (this.position.x > this.p.width - this.size / 2) {
-            this.applyForce(this.p.createVector(-this.velocity.x * 2, 0));
+        if (this.position.x > this.p.width - this.size) {
+            this.applyForce(this.p.createVector(-5, 0));
         }
-        if (this.position.x < this.size / 2) {
-            this.applyForce(this.p.createVector(-this.velocity.x * 2, 0));
+        if (this.position.x < this.size) {
+            this.applyForce(this.p.createVector(5, 0));
         }
     }
 }
